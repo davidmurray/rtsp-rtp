@@ -193,7 +193,7 @@ class RTSPClient:
             method='play',
             url=self.safe_url,
             headers={
-                'Range': f'npt="{npt}"'
+                'Range': f'npt={npt}'
             })
 
         if response.status != 200:
