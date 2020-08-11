@@ -42,13 +42,6 @@ class RTSPClient:
         return f'<RTSPClient [{self.host}]>'
 
     @staticmethod
-    def _parse_trackid(response):
-        regex = r'a=control:(.*)/(?P<trackid>\w+=\d+)'
-        match = re.search(regex, response.body, re.S)
-
-        return match.group('trackid')
-
-    @staticmethod
     def _parse_digest_auth_header(header):
         realm = re.search(r'realm=\"([^\"]+)\"',header).group(1)
         nonce = re.search(r'nonce=\"([\w]+)\"',header).group(1)
@@ -180,11 +173,11 @@ class RTSPClient:
         return response
 
     def setup(self, rtp_port):
-        trackid = self._parse_trackid(self.describe())
+        _ = self.describe()
 
         response = self._request(
             method='setup',
-            url=f'{self.url}/{trackid}',
+            url=self.safe_url,
             headers={
                 'Transport': f'RTP/AVP/UDP;unicast;client_port={rtp_port}-{rtp_port}'
             })
