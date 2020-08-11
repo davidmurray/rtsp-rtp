@@ -96,6 +96,7 @@ class RTSPClient:
             headers['Session'] = self._session
 
         headers['Cseq'] = self._next_cseq()
+        headers['User-Agent'] = 'rtsprtp/0.1' # TODO: Do not hardcode the version here.
 
         return headers
 
