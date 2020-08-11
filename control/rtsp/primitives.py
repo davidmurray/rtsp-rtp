@@ -69,7 +69,7 @@ class RTSPRequest:
 
         data = self.socket.recv(2048).decode()
         while not self.HEADER_END in data:
-            recv += self.socket.recv(2048).decode()
+            recv = self.socket.recv(2048).decode()
             if not recv:
                 break
 
