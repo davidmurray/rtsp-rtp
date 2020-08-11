@@ -144,7 +144,7 @@ class RTSPClient:
     def connect(self):
         if not self._connected:
             try:
-                self._socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+                self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 self._socket.connect((self.ip, self.port))
             except Exception as e:
                 raise RTSPClientError(
